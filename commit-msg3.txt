@@ -1,0 +1,12 @@
+Guard against encoding regressions
+
+Adds a UTF-8 / BOM check that runs as the first step of the build, and
+broadens the strip-bom helper to cover every text file in the project
+rather than a fixed list of directories. A BOM in package.json breaks
+Vite's PostCSS config loader with an opaque JSON parse error, so catching
+it in the build is cheaper than debugging it later.
+
+The README now documents both deployment paths and states plainly that
+the Actions workflow cannot currently start because the GitHub account
+is locked for billing, while the branch-based path is the one serving
+the live site.

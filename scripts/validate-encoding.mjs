@@ -1,23 +1,54 @@
-import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs'
+/**
+ * Fails the build if any text file is not valid UTF-8 or carries a BOM.
+ *
+ * A BOM in package.json breaks Vite's PostCSS config loader with a
+ * confusing "Unexpected token" error, so it is worth catching early.
+ */
+import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, extname } from 'node:path'
-const roots = ['src', 'scripts', 'tests', '.github', 'public']
-const exts = new Set(['.ts', '.tsx', '.js', '.mjs', '.cjs', '.css', '.json', '.html', '.md', '.yml', '.svg'])
-const skip = new Set(['node_modules', 'dist', '.git', 'shots', 'test-results'])
+
+const skip = new Set([
+  'node_modules', 'dist', '.git', 'shots', 'test-results',
+  'playwright-report', '.npm-cache', '.tmp', '.publish', 'ci-test',
+])
+const binary = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.ico', '.glb', '.gltf', '.woff', '.woff2', '.mp4', '.pdf', '.zip'])
 const files = []
-function walk(dir) {
-  for (const e of readdirSync(dir)) {
+
+function walk(dir, depth = 0) {
+  if (depth > 4) return
+  let entries
+  try { entries = readdirSync(dir) } catch { return }
+  for (const e of entries) {
     if (skip.has(e)) continue
     const full = join(dir, e)
-    if (statSync(full).isDirectory()) walk(full)
-    else if (exts.has(extname(full))) files.push(full)
+    let st
+    try { st = statSync(full) } catch { continue }
+    if (st.isDirectory()) walk(full, depth + 1)
+    else if (!binary.has(extname(full).toLowerCase())) files.push(full)
   }
 }
-for (const r of roots) if (existsSync(r)) walk(r)
+walk('.')
+
 const strict = new TextDecoder('utf-8', { fatal: true })
-let bad = 0
+let problems = 0
 for (const f of files) {
-  const b = readFileSync(f)
-  if (b.length >= 3 && b[0] === 0xef && b[1] === 0xbb && b[2] === 0xbf) { console.log('BOM:', f); bad++; continue }
-  try { strict.decode(b) } catch { console.log('INVALID UTF-8:', f); bad++ }
+  let b
+  try { b = readFileSync(f) } catch { continue }
+  if (b.length >= 3 && b[0] === 0xef && b[1] === 0xbb && b[2] === 0xbf) {
+    console.error('BOM: ' + f)
+    problems++
+    continue
+  }
+  try {
+    strict.decode(b)
+  } catch {
+    console.error('NOT VALID UTF-8: ' + f)
+    problems++
+  }
 }
-console.log(bad === 0 ? 'all ' + files.length + ' files are valid UTF-8, no BOMs' : bad + ' problem(s)')
+
+if (problems > 0) {
+  console.error('\n' + problems + ' encoding problem(s). Run `npm run strip:bom` and re-check.')
+  process.exit(1)
+}
+console.log('encoding OK ? ' + files.length + ' files are valid UTF-8 with no BOMs')

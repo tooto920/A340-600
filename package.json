@@ -6,12 +6,15 @@
   "description": "A340-600 - The Legend of Long Haul: an interactive cinematic WebGL tribute to the Airbus A340-600.",
   "scripts": {
     "dev": "vite",
-    "build": "npm run typecheck && vite build",
+    "build": "npm run validate:encoding && npm run typecheck && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "verify:geometry": "tsx scripts/render-check.ts",
     "test:browser": "playwright test",
-    "capture": "tsx scripts/capture.ts"
+    "capture": "tsx scripts/capture.ts",
+    "publish:pages": "tsx scripts/publish-gh-pages.ts",
+    "validate:encoding": "node scripts/validate-encoding.mjs",
+    "strip:bom": "node scripts/strip-bom.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
@@ -37,3 +40,6 @@
     "vite": "^8.3.4"
   }
 }
+
+
+

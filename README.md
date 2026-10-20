@@ -1,13 +1,13 @@
-# A340-600 — The Legend of Long Haul
+# A340-600 â€” The Legend of Long Haul
 
-An interactive, cinematic tribute to the **Airbus A340-600** — the last long-haul
+An interactive, cinematic tribute to the **Airbus A340-600** â€” the last long-haul
 quadjet ever built in series.
 
 The site is a single-page React application with two independent 3D experiences:
 
-1. **A scroll-driven cinematic story** — a fixed WebGL scene whose camera flies
+1. **A scroll-driven cinematic story** â€” a fixed WebGL scene whose camera flies
    along a six-chapter path as the page scrolls.
-2. **An aircraft explorer** — a separate viewer with its own camera, drag rotation,
+2. **An aircraft explorer** â€” a separate viewer with its own camera, drag rotation,
    wheel zoom, station presets, day/night lighting and a landing-gear toggle.
 
 ---
@@ -25,7 +25,7 @@ npm run dev        # http://127.0.0.1:5173/A340-600/
 | `npm run typecheck` | `tsc --noEmit` over the whole project |
 | `npm run build` | Type check, then a production build into `dist/` |
 | `npm run preview` | Serves the production build locally |
-| `npm run verify:geometry` | Offline geometry check — renders orthographic PNGs and asserts the model matches the published dimensions |
+| `npm run verify:geometry` | Offline geometry check â€” renders orthographic PNGs and asserts the model matches the published dimensions |
 | `npm run test:browser` | Playwright browser tests against the production build |
 
 ---
@@ -40,10 +40,10 @@ Geometry is authored in **real-world metres** in an "aircraft space" where
 `+X` runs aft from the nose, `+Y` is up and `+Z` is starboard, then scaled into
 the scene by the parent group.
 
-- `src/three/aircraftGeometry.ts` — the geometry builders: lofted fuselage,
+- `src/three/aircraftGeometry.ts` â€” the geometry builders: lofted fuselage,
   swept lifting surfaces, ring-revolved nacelles, fan blades, tyres and pylons.
-- `src/three/aircraftDimensions.ts` — every dimension, with its source.
-- `src/three/Aircraft.tsx` — assembles the parts into one reusable component
+- `src/three/aircraftDimensions.ts` â€” every dimension, with its source.
+- `src/three/Aircraft.tsx` â€” assembles the parts into one reusable component
   used by both the cinematic scene and the explorer.
 
 The model is verified offline by `npm run verify:geometry`, which rasterises
@@ -64,13 +64,13 @@ Figures in the interface and in `src/data/aircraftData.ts` are taken from
 manufacturer and regulator documents, and the sources are listed in the site
 itself under **The Final Horizon**.
 
-- Airbus, *Aircraft Characteristics — A340-500/-600*, Airport & Maintenance
-  Planning, Rev. 21, Aug 01/22 — dimensions, door stations, gear geometry,
+- Airbus, *Aircraft Characteristics â€” A340-500/-600*, Airport & Maintenance
+  Planning, Rev. 21, Aug 01/22 â€” dimensions, door stations, gear geometry,
   cabin volumes, MTOW, range.
-- Airbus Commercial Aircraft, *A340-600* programme page — history, seating
+- Airbus Commercial Aircraft, *A340-600* programme page â€” history, seating
   configurations, engine and performance data.
-- FAA Type Certificate Data Sheet A-140 — certification basis.
-- Rolls-Royce, Trent 500 family — engine programme data.
+- FAA Type Certificate Data Sheet A-140 â€” certification basis.
+- Rolls-Royce, Trent 500 family â€” engine programme data.
 
 Where manufacturers publish a range rather than a single number (seating,
 range, payload) the configuration-dependent value is stated instead of a
@@ -80,9 +80,9 @@ and **380 seats in the typical configuration**, with a maximum of 440 where
 the cabin is laid out densely.
 
 **The 3D model is a procedural reconstruction built to the published
-dimensions — it is not an official Airbus CAD model, and the wing planform
+dimensions â€” it is not an official Airbus CAD model, and the wing planform
 reproduces the published sweep, kink and taper to visual accuracy rather than
-to the exact published area of 437 m².**
+to the exact published area of 437 mÂ˛.**
 
 ---
 
@@ -119,13 +119,13 @@ src/
 
 - The cinematic canvas and the explorer canvas are separate WebGL contexts.
   The explorer is only mounted while it is on screen, so the two never compete.
-- Pixel ratio is capped (`1.5`–`1.75` for the cinematic scene, `1.4`–`1.6` for
+- Pixel ratio is capped (`1.5`â€“`1.75` for the cinematic scene, `1.4`â€“`1.6` for
   the explorer) rather than following `devicePixelRatio` exactly.
-- The cabin window belt is a single `InstancedMesh` — roughly 200 panes in one
+- The cabin window belt is a single `InstancedMesh` â€” roughly 200 panes in one
   draw call. Passenger doors are a second instanced mesh.
 - The fuselage livery is baked into vertex colours, so the whole body is one
   draw call with no texture upload.
-- Shadows are enabled but the shadow maps are modest (1024² cinematic, 2048²
+- Shadows are enabled but the shadow maps are modest (1024Â˛ cinematic, 2048Â˛
   explorer) and tightly fitted to the model.
 - No postprocessing pass is used. ACES Filmic tone mapping and a CSS vignette
   provide the grade at a fraction of the cost.
@@ -164,8 +164,15 @@ figures are present, and that every local asset resolves under the
 
 ## Deployment
 
-The site deploys to GitHub Pages on every push to `main` via
-`.github/workflows/deploy.yml`:
+The site is live at:
+
+**<https://tooto920.github.io/A340-600/>**
+
+There are two deployment paths in this repository.
+
+### 1. GitHub Actions (the intended primary path)
+
+`.github/workflows/deploy.yml` runs on every push to `main`:
 
 1. `npm ci` — installs from the committed lockfile
 2. `npm run typecheck`
@@ -173,22 +180,50 @@ The site deploys to GitHub Pages on every push to `main` via
 4. uploads `dist/` as the Pages artifact
 5. deploys with `actions/deploy-pages`
 
-`vite.config.ts` sets `base: '/A340-600/'` so every asset URL resolves under the
-repository sub-path.
+`vite.config.ts` sets `base: '/A340-600/'` so every asset URL resolves under
+the repository sub-path.
 
-**Expected URL:** <https://tooto920.github.io/A340-600/>
+> **Current status:** the workflow is committed and its steps are verified
+> locally, but the job does not start on GitHub. The runner reports:
+>
+> *"The job was not started because your account is locked due to a billing issue."*
+>
+> This is a lock on the GitHub account, not on the repository or the code.
+> Pushes to the repository work normally; only Actions runs are blocked. Once
+> the billing issue on the account is resolved the workflow will run on the
+> next push to `main` and take over as the primary deployment path.
+
+### 2. Branch-based Pages (the path actually in use)
+
+Because Actions cannot run while the account is locked, the site is currently
+published by pushing the built output to the `gh-pages` branch, which
+GitHub's own Pages publisher serves:
+
+```bash
+npm run build
+npm run publish:pages
+```
+
+`scripts/publish-gh-pages.ts` builds `dist/` into a `gh-pages` worktree and
+force-pushes it (the branch contains generated output only). A `.nojekyll`
+file is included so GitHub Pages does not run Jekyll over the build.
+
+To move back to the Actions path once the account is usable again:
+
+1. **Settings → Pages → Build and deployment → Source: GitHub Actions**
+2. Push to `main` (or re-run *Deploy to GitHub Pages* from the Actions tab)
 
 ### If the site does not appear
 
 1. Open the repository → **Settings** → **Pages**.
-2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**
+   (or to the `gh-pages` branch for the branch-based path).
 3. Re-run the `Deploy to GitHub Pages` workflow from the **Actions** tab.
 
----
-
-## Licence and attribution
+--- and attribution
 
 This is a non-commercial tribute. The Airbus A340-600, the Rolls-Royce Trent
 500 family and all associated marks are the property of their respective
 owners; no affiliation or endorsement is implied. The 3D aircraft is an
 original procedural reconstruction built for this project.
+
