@@ -1,0 +1,39 @@
+{
+  "name": "a340-600-legend-of-long-haul",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A340-600 - The Legend of Long Haul: an interactive cinematic WebGL tribute to the Airbus A340-600.",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "verify:geometry": "tsx scripts/render-check.ts",
+    "test:browser": "playwright test",
+    "capture": "tsx scripts/capture.ts"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "@react-three/postprocessing": "^3.2.1",
+    "gsap": "^3.15.0",
+    "postprocessing": "^6.39.5",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.0",
+    "vite": "^8.3.4"
+  }
+}
