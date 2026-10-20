@@ -44,3 +44,9 @@ view-*.png
 # Local server logs
 dev-server.log
 preview.log
+# Local CI reproduction clone
+ci-test/
+
+# Local scratch
+.publish/
+live-index.html

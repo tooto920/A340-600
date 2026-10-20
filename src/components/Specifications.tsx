@@ -1,7 +1,7 @@
 import { useReveal } from '../hooks/useReveal'
 import { HEADLINE_SPECS, MILESTONES, SOURCES, TIMELINE } from '../data/aircraftData'
 
-/** Chapter V Ă˘â‚¬â€ť animated specification panels. */
+/** Chapter V — animated specification panels. */
 export function SpecGrid() {
   const ref = useReveal<HTMLDivElement>()
 
@@ -102,7 +102,7 @@ export function SourceList() {
               className="group block transition-colors"
             >
               <span className="block font-display text-[0.92rem] font-medium text-mist/90 group-hover:text-electric">
-                {s.label} <span aria-hidden>Ă˘â€ â€”</span>
+                {s.label} <span aria-hidden>—</span>
               </span>
               <span className="mt-0.5 block text-[0.78rem] font-light text-silver/45">
                 {s.detail}

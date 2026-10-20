@@ -1,0 +1,21 @@
+﻿Fix text encoding and add branch-based Pages publishing
+
+Several source files had picked up mojibake: em dashes and middle dots
+that had been double- and triple-encoded by the PowerShell write path.
+The HUD read "A340-600 Â· Live 3D" in the browser. All files are now
+valid UTF-8 with no BOM, and the intended characters render correctly.
+
+Also adds:
+- scripts/publish-gh-pages.ts, which publishes dist/ to the gh-pages
+  branch. This is the fallback deployment path used while the account is
+  locked for billing and the Actions workflow cannot start; the official
+  Actions workflow in .github/workflows/deploy.yml remains the primary
+  path and takes over as soon as the account is usable again.
+- scripts/validate-encoding.mjs, a guard that fails if any source file
+  is not valid UTF-8 or carries a BOM.
+- scripts/verify-live.ts, a browser check against the deployed URL.
+
+Verified: typecheck, production build, offline geometry check and all
+11 Playwright browser tests pass; the deployed site returns HTTP 200
+with every asset resolving under the /A340-600/ base path and no
+console errors.

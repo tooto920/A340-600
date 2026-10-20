@@ -334,7 +334,7 @@ export function buildVerticalSurface(
 }
 
 /**
- * A small patch that sits on the fuselage skin Ă˘â‚¬â€ť used for cabin windows,
+ * A small patch that sits on the fuselage skin — used for cabin windows,
  * doors and the cockpit glazing.
  */
 export function buildSkinPatch(
@@ -553,7 +553,7 @@ export function buildPylon(
  * Builds a single quad conformed to the fuselage skin.
  *
  * The section convention is theta = 0 at the side and theta = PI/2 at the
- * top, so a patch is mirrored to port by negating Z â€” never by negating
+ * top, so a patch is mirrored to port by negating Z — never by negating
  * theta, which would mirror it onto the belly.
  */
 function skinQuad(
@@ -622,7 +622,7 @@ function mergeQuads(
 
 /**
  * The cabin window belt: every pane is conformed to the fuselage skin at its
- * exact station, then merged into one geometry â€” one draw call, and each pane
+ * exact station, then merged into one geometry — one draw call, and each pane
  * sits precisely on the hull whatever the local radius is.
  */
 export function buildWindowBand(

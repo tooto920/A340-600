@@ -58,7 +58,7 @@ test.describe('A340-600 site', () => {
     await page.waitForTimeout(3500)
 
     // Crop the region where the aircraft should be and require a large,
-    // contiguous, bright body Ă„â€šĂ‹ÂÄ‚ËĂ˘â‚¬ĹˇĂ‚Â¬Ä‚ËĂ˘â€šÂ¬ÄąÄ„ the fuselage is a light grey mass.
+    // contiguous, bright body contiguous, bright body — the fuselage is a light grey mass the fuselage is a light grey mass.
     const canvas = page.locator('canvas').first()
     const box = await canvas.boundingBox()
     if (!box) throw new Error('canvas has no bounding box')

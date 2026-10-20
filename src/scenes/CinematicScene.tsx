@@ -27,17 +27,17 @@ const CENTRE = 37.68
  * centre of the airframe rather than from the nose.
  */
 const CAMERA_PATH: { position: THREE.Vector3; target: THREE.Vector3 }[] = [
-  // I Ă˘â‚¬â€ť The Legend: a wide three-quarter establishing shot.
+  // I — The Legend: a wide three-quarter establishing shot.
   { position: new THREE.Vector3(-14, 2, 17), target: new THREE.Vector3(0, 2.2, 0) },
-  // II Ă˘â‚¬â€ť The Flying Pencil: a low, close pass along the fuselage.
+  // II — The Flying Pencil: a low, close pass along the fuselage.
   { position: new THREE.Vector3(-26, 0.5, 9), target: new THREE.Vector3(6, 1.6, 0) },
-  // III Ă˘â‚¬â€ť Power of Four: in on the wing and the engines.
+  // III — Power of Four: in on the wing and the engines.
   { position: new THREE.Vector3(6, -1, 15), target: new THREE.Vector3(6, -1.2, 8) },
-  // IV Ă˘â‚¬â€ť Engineering Masterpiece: the flight deck and the nose.
+  // IV — Engineering Masterpiece: the flight deck and the nose.
   { position: new THREE.Vector3(-27, 1.5, 6.5), target: new THREE.Vector3(-31, 0.4, 0) },
-  // V Ă˘â‚¬â€ť Long Haul Excellence: a high three-quarter that shows the whole span.
+  // V — Long Haul Excellence: a high three-quarter that shows the whole span.
   { position: new THREE.Vector3(-13, 12, 27), target: new THREE.Vector3(0, 2, 0) },
-  // VI Ă˘â‚¬â€ť The Final Horizon: the aircraft departs into the distance.
+  // VI — The Final Horizon: the aircraft departs into the distance.
   { position: new THREE.Vector3(-17, 7, 30), target: new THREE.Vector3(9, 2.5, 0) },
 ]
 

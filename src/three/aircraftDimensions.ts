@@ -3,7 +3,7 @@
  *
  * Sources:
  *  - Airbus "Aircraft Characteristics - Airport and Maintenance Planning",
- *    A340-500/-600 (Rev. 21, Aug 01/22) Ă˘â‚¬â€ť dimensions, doors, gear, volumes.
+ *    A340-500/-600 (Rev. 21, Aug 01/22) — dimensions, doors, gear, volumes.
  *  - Airbus Commercial Aircraft, A340-600 programme page.
  *  - FAA / EASA type certificate data sheet for the A340-600.
  *

@@ -31,7 +31,7 @@ export default function App() {
     return () => window.clearTimeout(t)
   }, [])
 
-  // Only mount the explorer canvas while it is on screen â€” it is a second
+  // Only mount the explorer canvas while it is on screen — it is a second
   // WebGL context and should not compete with the cinematic scene.
   useEffect(() => {
     const el = document.getElementById('explorer')
@@ -80,12 +80,12 @@ export default function App() {
       <main className="relative z-10">
         <Hero onExplore={scrollToExplorer} />
 
-        {/* Chapter I â€” The Legend */}
+        {/* Chapter I — The Legend */}
         <ChapterSection chapter={CHAPTERS[0]} index={0} align="left">
           <Timeline />
         </ChapterSection>
 
-        {/* Chapter II â€” The Flying Pencil */}
+        {/* Chapter II — The Flying Pencil */}
         <ChapterSection chapter={CHAPTERS[1]} index={1} align="right">
           <div className="reveal-d1 mt-8 flex flex-wrap gap-3">
             {[
@@ -105,7 +105,7 @@ export default function App() {
           </div>
         </ChapterSection>
 
-        {/* Chapter III â€” Power of Four */}
+        {/* Chapter III — Power of Four */}
         <ChapterSection chapter={CHAPTERS[2]} index={2} align="left">
           <div className="reveal-d1 mt-8 grid grid-cols-2 gap-3 sm:max-w-md">
             {[
@@ -125,14 +125,14 @@ export default function App() {
           </div>
         </ChapterSection>
 
-        {/* Chapter IV â€” Engineering Masterpiece */}
+        {/* Chapter IV — Engineering Masterpiece */}
         <ChapterSection chapter={CHAPTERS[3]} index={3} align="right">
           <div className="reveal-d1 mt-8 grid grid-cols-2 gap-3 sm:max-w-md">
             {[
               ['14', 'Wheels'],
-              ['437 mÂ˛', 'Wing area'],
+              ['437 m·', 'Wing area'],
               ['9.2', 'Aspect ratio'],
-              ['31.1Â°', 'Quarter-chord sweep'],
+              ['31.1°', 'Quarter-chord sweep'],
             ].map(([value, label]) => (
               <div
                 key={label}
@@ -189,7 +189,7 @@ export default function App() {
                     <div className="absolute left-5 top-5 flex items-center gap-2">
                       <span className="h-1.5 w-1.5 rounded-full bg-electric" />
                       <span className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-silver/55">
-                        A340-600 Â· Live 3D
+                        A340-600 · Live 3D
                       </span>
                     </div>
                     <div className="absolute bottom-5 right-5 text-right">
@@ -197,7 +197,7 @@ export default function App() {
                         L 75.36 m
                       </p>
                       <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-silver/35">
-                        S 63.45 m Â· H 17.80 m
+                        S 63.45 m · H 17.80 m
                       </p>
                     </div>
                   </div>
@@ -220,13 +220,13 @@ export default function App() {
             </div>          </div>
         </section>
 
-        {/* Chapter V â€” Long Haul Excellence */}
+        {/* Chapter V — Long Haul Excellence */}
         <ChapterSection chapter={CHAPTERS[4]} index={4} align="left">
           <SpecGrid />
           <MilestoneRow />
         </ChapterSection>
 
-        {/* Chapter VI â€” The Final Horizon */}
+        {/* Chapter VI — The Final Horizon */}
         <ChapterSection chapter={CHAPTERS[5]} index={5} align="right">
           <SourceList />
         </ChapterSection>
@@ -272,7 +272,7 @@ function Footer() {
       <div className="shell flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
         <div>
           <p className="font-display text-[0.95rem] font-bold tracking-tight text-mist">
-            A340-600 â€” The Legend of Long Haul
+            A340-600 — The Legend of Long Haul
           </p>
           <p className="mt-1.5 text-[0.78rem] font-light text-silver/45">
             An interactive tribute. Procedural 3D reconstruction, not an official Airbus model.
