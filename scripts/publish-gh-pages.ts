@@ -12,7 +12,7 @@ const run = (cmd, args) =>
   execFileSync(cmd, args, { cwd: process.cwd(), encoding: 'utf8', stdio: 'pipe' })
 
 if (!existsSync('dist')) {
-  console.error('dist/ not found — run `npm run build` first')
+  console.error('dist/ not found â€” run `npm run build` first')
   process.exit(1)
 }
 
@@ -40,7 +40,9 @@ writeFileSync(`${worktree}/.nojekyll`, '')
 
 run('git', ['-C', worktree, 'add', '-A'])
 run('git', ['-C', worktree, 'commit', '-m', 'Publish production build'])
-run('git', ['push', 'origin', branch])
+// The gh-pages branch is generated output, so it is force-pushed.
+run('git', ['push', '--force', 'origin', branch])
 
 run('git', ['worktree', 'remove', '--force', worktree])
 console.log('published dist/ to', branch)
+
